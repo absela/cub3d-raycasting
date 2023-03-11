@@ -1,10 +1,4 @@
-
 #include "cub3d.h"
-
-
-
-
-
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
 	char	*dst;
@@ -12,6 +6,39 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
+
+void sky(t_mlx *mlx)
+{
+	int i = 0;
+	int j;
+	while(i < mlx->window_hight/2)
+	{
+		j = 0;
+		while(j < mlx->window_width)
+		{
+			my_mlx_pixel_put(mlx->img,j,i, 0x99e6ff);
+			j++;
+		}
+		i++;
+	}
+}
+
+void loor(t_mlx *mlx)
+{
+	int i = mlx->window_hight/2;
+	int j;
+	while(i < mlx->window_hight)
+	{
+		j = 0;
+		while(j < mlx->window_width)
+		{
+			my_mlx_pixel_put(mlx->img,j,i, 0x8D5B4C);
+			j++;
+		}
+		i++;
+	}
+}
+
 
 double to_radian(double t)
 {
@@ -246,7 +273,9 @@ int	every_frame(t_mlx	*mlx)
 	mlx_destroy_image(mlx->mlx, mlx->img->img);
 	mlx->img->img = mlx_new_image(mlx->mlx,mlx->map_width * TILE, mlx->map_hight * TILE);
 	mlx->img->addr = mlx_get_data_addr(mlx->img->img, &mlx->img->bits_per_pixel, &mlx->img->line_length, &mlx->img->endian);
-	draw_world_2d(mlx);
+	sky(mlx);
+	loor(mlx);
+	// draw_world_2d(mlx);
 	cast_All_rays(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
 	return (0);

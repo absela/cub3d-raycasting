@@ -53,7 +53,6 @@ typedef struct  s_mlx
     char    **map;
     int     map_hight;
     int     map_width;
-    double  player_angle;
     double  player_view_angle;
     int     player_field_of_view;
     int     player_move_direction;
