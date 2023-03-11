@@ -23,6 +23,7 @@ void sky(t_mlx *mlx)
 	}
 }
 
+
 void loor(t_mlx *mlx)
 {
 	int i = mlx->window_hight/2;
@@ -40,9 +41,10 @@ void loor(t_mlx *mlx)
 }
 
 
+
 double to_radian(double t)
 {
-	return (t * (PI / 180));
+	return (t * PI / 180);
 }
 
 void dda(t_mlx *data, double X0, double Y0, double X1, double Y1, double angle, double scale,int color)
@@ -298,6 +300,8 @@ int main(int ac, char **av)
 	initialize_player(data);
 	data->img->img = mlx_new_image(data->mlx,data->map_width * TILE, data->map_hight * TILE);
 	data->img->addr = mlx_get_data_addr(data->img->img, &data->img->bits_per_pixel, &data->img->line_length, &data->img->endian);
+	data->dist_btw_p_pro = ((data->window_width /2) / tanf(to_radian(data->player_field_of_view /2)));
+	data->ang_btw_ray = data->player_field_of_view / data->window_width ;
 	}
 	mlx_loop_hook(data->mlx, every_frame, data);
 	mlx_hook(data->win, 2, 0, on_keydown, data);

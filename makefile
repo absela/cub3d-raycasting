@@ -26,6 +26,8 @@ clean:
 	$(RM) $(OBJS)
 
 fclean: clean
+	cd libft && make fclean
+	cd ..
 	$(RM) $(NAME)
 
 re: fclean all

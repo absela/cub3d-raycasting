@@ -57,6 +57,8 @@ typedef struct  s_mlx
     int     player_field_of_view;
     int     player_move_direction;
     int     player_rotate_direction;
+    double  dist_btw_p_pro;
+    double  ang_btw_ray;
 }               t_mlx;
 
 
