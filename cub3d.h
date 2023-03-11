@@ -3,8 +3,8 @@
 
 #define TILE 32
 #define PI 3.14159265359
-#define MVSPEED 1
-#define TUSPEED 0.01
+#define MVSPEED 3
+#define TUSPEED 0.1
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,6 +26,19 @@ typedef struct	s_img {
 }				t_img;
 
 
+typedef struct s_ray
+{
+    double ray_angle;
+    double wall_hit_x;
+    double wall_hit_y;
+    double distance;
+    int hit_vertical;
+    int ray_fac_down;
+    int ray_fac_up;
+    int ray_fac_right;
+    int ray_fac_left;
+    int wall_hit;
+}               t_ray;
 
 
 typedef struct  s_mlx

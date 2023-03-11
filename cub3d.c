@@ -1,6 +1,10 @@
 
 #include "cub3d.h"
 
+
+
+
+
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
 	char	*dst;
@@ -29,13 +33,11 @@ void dda(t_mlx *data, double X0, double Y0, double X1, double Y1, double angle, 
     double Yinc = dy / (double)steps;
     for (int i = 0; i <= steps; i++)
     {
-        mlx_pixel_put(data->mlx, data->win,X0,Y0,color);
+        my_mlx_pixel_put(data->img,X0,Y0,color);
         X0 += Xinc;
         Y0 += Yinc;
     }
 }
-
-
 
 void cast_All_rays(t_mlx *mlx)
 {
@@ -45,13 +47,10 @@ void cast_All_rays(t_mlx *mlx)
    while(i < 60 )
    {
             dda(mlx,mlx->player_pos_x,mlx->player_pos_y,mlx->player_pos_x,mlx->player_pos_y,ray_angle,90,0xFFFFFF);
-            //render(mlx,&r);
             ray_angle += to_radian(mlx->player_field_of_view)/60 ;
             i++;
   }
 }
-
-
 
 double	limit_angles(double ra)
 {
@@ -248,8 +247,8 @@ int	every_frame(t_mlx	*mlx)
 	mlx->img->img = mlx_new_image(mlx->mlx,mlx->map_width * TILE, mlx->map_hight * TILE);
 	mlx->img->addr = mlx_get_data_addr(mlx->img->img, &mlx->img->bits_per_pixel, &mlx->img->line_length, &mlx->img->endian);
 	draw_world_2d(mlx);
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
 	cast_All_rays(mlx);
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
 	return (0);
 }
 
